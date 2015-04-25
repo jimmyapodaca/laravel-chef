@@ -1,0 +1,9 @@
+<VirtualHost *:443>
+	DocumentRoot <%= "#{node['laravel']['project_root']}/#{node['laravel']['project_name']}" %>/public
+	ServerName <%= "dev.#{node['laravel']['project_name']}.com" %>
+	CustomLog /var/log/apache2/<%= "dev.#{node['laravel']['project_name']}.com-access_log_ssl combined" %>
+	ErrorLog /var/log/apache2/<%= "dev.#{node['laravel']['project_name']}.com-error_log_ssl" %>
+	SSLEngine on
+	SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+	SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+</VirtualHost>

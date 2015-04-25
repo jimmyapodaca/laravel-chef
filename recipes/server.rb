@@ -28,3 +28,11 @@ web_app "laravel" do
   server_aliases node['fqdn']
   enable true
 end
+
+web_app "laravel-ssl" do
+  template "laravel-ssl.conf.erb"
+  docroot "#{path}/public"
+  server_name node['fqdn']
+  server_aliases node['fqdn']
+  enable true
+end
