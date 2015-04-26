@@ -23,6 +23,8 @@ include_recipe "mysql::client"
 ::Chef::Recipe.send(:include, Laravel::Helpers)
 path = project_path
 
+include_recipe "apt"
+package "php5-mysql"
 
 # Check if this is a development machine
 if is_local_host? db['host']
