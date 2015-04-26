@@ -26,7 +26,7 @@ unless missing_attrs.empty?
   " For more information, see https://github.com/BeattieM/laravel#attributes"
 end
 
-
+include_recipe "apt"
 include_recipe "php"
 
 
