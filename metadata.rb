@@ -11,6 +11,7 @@ supports 'debian'
 
 depends "php"
 depends "php-mcrypt"
+depends "apt"
 depends "apache2"
 depends "mysql", "4.1.2"
 depends "composer"
