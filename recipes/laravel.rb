@@ -30,7 +30,7 @@ end
 
 # Notify the user if they are creating a new project
 # We do this because creating a new project takes a while
-unless ::File.directory?("#{path}")
+unless ::File.exists?("#{path}/composer.json")
   log "Creating #{node['laravel']['project_name']} ..."
 end
 
@@ -39,7 +39,7 @@ end
 execute "Create Laravel Project" do
   action :run
   command "#{composer_command} create-project laravel/laravel #{path} --prefer-dist"
-  not_if {::File.directory?("#{path}")}
+  not_if {::File.exists?("#{path}/composer.json")}
   notifies :run, "execute[Chmod app/storage directory]"
 end
 
