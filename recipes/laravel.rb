@@ -62,7 +62,7 @@ if ::File.exist?("#{path}/composer.json")
 
 # Create the composer config files if they do not already exist
 # Generates a new Laravel encryption key
-# This is assumed to be during new project creation  
+# This is assumed to be during new project creation
 else
   template "#{path}/composer.json" do
      variables(
