@@ -78,12 +78,6 @@ else
     )
     mode "0644"
   end
-
-  # Generate Laravel encryption key
-  execute "Generate Laravel Encryption Key" do
-    action :run
-    command "cd #{path}; php artisan key:generate"
-  end
 end
 
 
