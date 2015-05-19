@@ -39,8 +39,8 @@ end
 
 # Create the database config file if one does not already exist
 # This is assumed to be during new project creation
-unless ::File.exist?("#{path}/app/config/database.php")
-  template "#{path}/app/config/database.php" do
+unless ::File.exist?("#{path}/config/database.php")
+  template "#{path}/config/database.php" do
     mode "0644"
   end
 
