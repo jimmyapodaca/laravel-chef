@@ -85,7 +85,7 @@ else
   # Update composer dependencies
   execute "Install Composer Packages" do
     action :run
-    command "cd #{path}; #{composer_command} install"
+    command "cd #{path}; #{composer_command} update"
   end
 
   template "#{path}/config/app.php" do
