@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
 	/*
 	|--------------------------------------------------------------------------
@@ -44,9 +44,15 @@ return array(
 	|
 	*/
 
-	'connections' => array(
+	'connections' => [
 
-		'mysql' => array(
+		'sqlite' => [
+			'driver'   => 'sqlite',
+			'database' => storage_path().'/database.sqlite',
+			'prefix'   => '',
+		],
+
+		'mysql' => [
 			'driver'    => 'mysql',
 			'host'      => <%= "\'#{node['laravel']['db']['host']}\'" %>,
 			'database'  => <%= "\'#{node['laravel']['db']['name']}\'" %>,
@@ -55,9 +61,30 @@ return array(
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-		)
-		
-	),
+			'strict'    => false,
+		],
+
+		'pgsql' => [
+			'driver'   => 'pgsql',
+			'host'     => env('DB_HOST', 'localhost'),
+			'database' => env('DB_DATABASE', 'forge'),
+			'username' => env('DB_USERNAME', 'forge'),
+			'password' => env('DB_PASSWORD', ''),
+			'charset'  => 'utf8',
+			'prefix'   => '',
+			'schema'   => 'public',
+		],
+
+		'sqlsrv' => [
+			'driver'   => 'sqlsrv',
+			'host'     => env('DB_HOST', 'localhost'),
+			'database' => env('DB_DATABASE', 'forge'),
+			'username' => env('DB_USERNAME', 'forge'),
+			'password' => env('DB_PASSWORD', ''),
+			'prefix'   => '',
+		],
+
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -83,16 +110,16 @@ return array(
 	|
 	*/
 
-	'redis' => array(
+	'redis' => [
 
 		'cluster' => false,
 
-		'default' => array(
+		'default' => [
 			'host'     => '127.0.0.1',
 			'port'     => 6379,
 			'database' => 0,
-		),
+		],
 
-	),
+	],
 
-);
+];
