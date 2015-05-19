@@ -72,6 +72,16 @@ else
     mode "0644"
   end
 
+  template "#{path}/.env" do
+    variables(
+      :host => node['laravel']['db']['host'],
+      :name => node['laravel']['db']['name'],
+      :user => node['laravel']['db']['user'],
+      :password => node['laravel']['db']['password']
+    )
+    mode "0644"
+  end
+
   template "#{path}/config/app.php" do
     variables(
       :recipes => node['recipes']
