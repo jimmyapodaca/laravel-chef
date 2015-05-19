@@ -79,12 +79,6 @@ else
     mode "0644"
   end
 
-  # Update composer dependencies
-  execute "Install Composer Packages" do
-    action :run
-    command "cd #{path}; #{composer_command} update"
-  end
-
   # Generate Laravel encryption key
   execute "Generate Laravel Encryption Key" do
     action :run
