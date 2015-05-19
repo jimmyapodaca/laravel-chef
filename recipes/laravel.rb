@@ -82,6 +82,12 @@ else
     mode "0644"
   end
 
+  # Update composer dependencies
+  execute "Install Composer Packages" do
+    action :run
+    command "cd #{path}; #{composer_command} install"
+  end
+
   template "#{path}/config/app.php" do
     variables(
       :recipes => node['recipes']
