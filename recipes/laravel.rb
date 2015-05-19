@@ -19,6 +19,7 @@
 ::Chef::Recipe.send(:include, Laravel::Helpers)
 path = project_path
 
+package "git"
 
 # Check if composer has been installed globally
 if node['composer']['install_globally']
