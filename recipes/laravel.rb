@@ -40,14 +40,14 @@ execute "Create Laravel Project" do
   action :run
   command "#{composer_command} create-project laravel/laravel #{path} --prefer-dist"
   not_if {::File.exists?("#{path}/composer.json")}
-  notifies :run, "execute[Chmod app/storage directory]"
+  notifies :run, "execute[Chmod storage directory]"
 end
 
 
 # Laravel requires this directory to have write access by the web server
-execute "Chmod app/storage directory" do
+execute "Chmod storage directory" do
   action :nothing
-  command "sudo chmod -R 777 #{path}/app/storage"
+  command "sudo chmod -R 777 #{path}/storage"
 end
 
 
@@ -71,7 +71,7 @@ else
     mode "0644"
   end
 
-  template "#{path}/app/config/app.php" do
+  template "#{path}/config/app.php" do
     variables(
       :recipes => node['recipes']
     )
