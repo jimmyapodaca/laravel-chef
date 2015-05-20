@@ -64,7 +64,7 @@ else
 
       Dir.new(dir).each do |file|
         unless file == "." or file == ".."
-          copy_entry file "#{path}/#{file}"
+          FileUtils.copy_entry file "#{path}/#{file}"
         end
       end
     end
