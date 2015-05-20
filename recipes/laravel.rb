@@ -64,6 +64,9 @@ else
 
       Dir.new(dir).each do |file|
         unless file == "." or file == ".."
+          if File.exist?("#{path}/#{file}")
+            FileUtils.rm "#{path}/#{file}"
+          end
           FileUtils.copy_entry file "#{path}/#{file}"
         end
       end
