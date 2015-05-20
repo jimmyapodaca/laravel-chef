@@ -62,14 +62,19 @@ else
         notifies :run, "execute[Chmod storage directory]"
       end
 
-      Dir.new(dir).each do |file|
-        unless file == "." or file == ".."
-          if File.exist?("#{path}/#{file}")
-            FileUtils.rm "#{path}/#{file}"
+      ruby_block "move files from temp folder" do
+        block do
+          Dir.new(dir).each do |file|
+            unless file == "." or file == ".."
+              if File.exist?("#{path}/#{file}")
+                FileUtils.rm "#{path}/#{file}"
+              end
+              puts "copying file #{file} to #{path}"
+              FileUtils.copy_entry file "#{path}/#{file}"
+            end
           end
-          puts "copying file #{file} to #{path}"
-          FileUtils.copy_entry file "#{path}/#{file}"
         end
+        action :run
       end
     end
   else
