@@ -54,10 +54,35 @@ else
   # We do this because creating a new project takes a while
   log "Creating #{node['laravel']['project_name']} ..."
 
-  execute "Create Laravel Project" do
-    action :run
-    command "#{composer_command} create-project laravel/laravel #{path} --prefer-dist"
-    notifies :run, "execute[Chmod storage directory]"
+  if node['laravel']['create_with_temp_folder']
+    Dir.mktmpdir do |dir|
+      execute "Create Laravel Project (with temp folder)" do
+        action :run
+        command "#{composer_command} create-project laravel/laravel #{dir} --prefer-dist"
+        notifies :run, "execute[Chmod storage directory]"
+      end
+
+      ruby_block "move files from temp folder" do
+        block do
+          Dir.new(dir).each do |file|
+            unless file == "." or file == ".."
+              if File.exist?("#{path}/#{file}")
+                FileUtils.rm "#{path}/#{file}"
+              end
+              puts "copying file #{dir}/#{file} to #{path}"
+              FileUtils.copy_entry "#{dir}/#{file}", "#{path}/#{file}"
+            end
+          end
+        end
+        action :run
+      end
+    end
+  else
+    execute "Create Laravel Project" do
+      action :run
+      command "#{composer_command} create-project laravel/laravel #{path} --prefer-dist"
+      notifies :run, "execute[Chmod storage directory]"
+    end
   end
 
   template "#{path}/composer.json" do
