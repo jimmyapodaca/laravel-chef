@@ -67,6 +67,7 @@ else
           if File.exist?("#{path}/#{file}")
             FileUtils.rm "#{path}/#{file}"
           end
+          puts "copying file #{file} to #{path}"
           FileUtils.copy_entry file "#{path}/#{file}"
         end
       end
