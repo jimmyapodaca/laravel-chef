@@ -56,7 +56,7 @@ else
 
   if node['laravel']['create_with_temp_folder']
     Dir.mktmpdir do |dir|
-      execute "Create Laravel Project" do
+      execute "Create Laravel Project (with temp folder)" do
         action :run
         command "#{composer_command} create-project laravel/laravel #{dir} --prefer-dist"
         notifies :run, "execute[Chmod storage directory]"
