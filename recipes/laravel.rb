@@ -28,23 +28,6 @@ else
   composer_command = "php composer"
 end
 
-
-# Notify the user if they are creating a new project
-# We do this because creating a new project takes a while
-unless ::File.exists?("#{path}/composer.json")
-  log "Creating #{node['laravel']['project_name']} ..."
-end
-
-
-# Create a new project if it does not already exist
-execute "Create Laravel Project" do
-  action :run
-  command "#{composer_command} create-project laravel/laravel #{path} --prefer-dist"
-  not_if {::File.exists?("#{path}/composer.json")}
-  notifies :run, "execute[Chmod storage directory]"
-end
-
-
 # Laravel requires this directory to have write access by the web server
 execute "Chmod storage directory" do
   action :nothing
@@ -61,10 +44,22 @@ if ::File.exist?("#{path}/composer.json")
     command "cd #{path}; #{composer_command} install"
   end
 
-# Create the composer config files if they do not already exist
-# Generates a new Laravel encryption key
-# This is assumed to be during new project creation
 else
+  # Create a new project if it does not already exist
+  # Creates composer and other config files
+  # Generates a new Laravel encryption key
+  # This is assumed to be during new project creation
+
+  # First, notify the user that they are creating a new project
+  # We do this because creating a new project takes a while
+  log "Creating #{node['laravel']['project_name']} ..."
+
+  execute "Create Laravel Project" do
+    action :run
+    command "#{composer_command} create-project laravel/laravel #{path} --prefer-dist"
+    notifies :run, "execute[Chmod storage directory]"
+  end
+
   template "#{path}/composer.json" do
      variables(
       :recipes => node['recipes']
