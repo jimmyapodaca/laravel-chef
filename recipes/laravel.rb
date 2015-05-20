@@ -62,7 +62,7 @@ else
         notifies :run, "execute[Chmod storage directory]"
       end
 
-      dir.each do |file|
+      Dir.new(dir).each do |file|
         unless file == "." or file == ".."
           copy_entry file "#{path}/#{file}"
         end
