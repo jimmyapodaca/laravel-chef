@@ -22,7 +22,7 @@ path = project_path
 
 # Prepare Apache and Virt Host
 web_app "laravel" do
-  template "#{node['laravel']['version']}/laravel.conf.erb"
+  template "laravel.conf.erb"
   docroot "#{path}/public"
   server_name node['fqdn']
   server_aliases node['fqdn']
@@ -30,7 +30,7 @@ web_app "laravel" do
 end
 
 web_app "laravel-ssl" do
-  template "#{node['laravel']['version']}/laravel-ssl.conf.erb"
+  template "laravel-ssl.conf.erb"
   docroot "#{path}/public"
   server_name node['fqdn']
   server_aliases node['fqdn']
