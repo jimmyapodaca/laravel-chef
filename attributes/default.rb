@@ -17,6 +17,7 @@
 
 default['laravel']['project_root'] = "/srv"
 default['laravel']['create_with_temp_folder'] = false
+default['laravel']['version'] = 5.0
 
 default['laravel']['db']['name'] = "laraveldb"
 default['laravel']['db']['host'] = "localhost"
