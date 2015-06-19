@@ -86,13 +86,15 @@ else
   end
 
   template "#{path}/composer.json" do
-     variables(
+    source "#{node['laravel']['version']}/composer.json.erb"
+    variables(
       :recipes => node['recipes']
     )
     mode "0644"
   end
 
   template "#{path}/.env" do
+    source "#{node['laravel']['version']}/.env.erb"
     variables(
       :host => node['laravel']['db']['host'],
       :name => node['laravel']['db']['name'],
@@ -100,6 +102,7 @@ else
       :password => node['laravel']['db']['password']
     )
     mode "0644"
+    only_if { node['laravel']['version'] >= 5 }
   end
 
   # Update composer dependencies
@@ -109,6 +112,7 @@ else
   end
 
   template "#{path}/config/app.php" do
+    source "#{node['laravel']['version']}/app.php.erb"
     variables(
       :recipes => node['recipes']
     )

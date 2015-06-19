@@ -43,6 +43,7 @@ else
   # Create the composer config files
   # This will replace any existing file so that the admin module can be included
   template "#{path}/composer.json" do
+    source "#{node['laravel']['version']}/composer.json.erb"
     variables(
       :recipes => node['recipes']
     )
@@ -50,6 +51,7 @@ else
   end
 
   template "#{path}/app/config/app.php" do
+    source "#{node['laravel']['version']}/app.php.erb"
     variables(
       :recipes => node['recipes']
     )
@@ -76,11 +78,13 @@ else
 
   # Add admin site settings config
   template "#{path}/app/config/administrator/settings/site.php" do
+    source "#{node['laravel']['version']}/site.php.erb"
     mode "0644"
   end
 
   # Set base admin menu configuration
   template "#{path}/app/config/packages/frozennode/administrator/administrator.php" do
+    source "#{node['laravel']['version']}/administrator.php.erb"
     mode "0644"
   end
 end

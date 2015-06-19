@@ -41,6 +41,7 @@ end
 # This is assumed to be during new project creation
 unless ::File.exist?("#{path}/config/database.php")
   template "#{path}/config/database.php" do
+    source "#{node['laravel']['version']}/database.php.erb"
     mode "0644"
   end
 
