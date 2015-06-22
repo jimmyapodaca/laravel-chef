@@ -28,10 +28,16 @@ else
   composer_command = "php composer"
 end
 
+if node['laravel']['version'] >= 5
+  storage = "app/storage"
+else
+  storage = "storage"
+end
+
 # Laravel requires this directory to have write access by the web server
 execute "Chmod storage directory" do
   action :nothing
-  command "sudo chmod -R 777 #{path}/storage"
+  command "sudo chmod -R 777 #{path}/#{storage}"
 end
 
 
