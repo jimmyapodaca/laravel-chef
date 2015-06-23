@@ -28,10 +28,18 @@ else
   composer_command = "php composer"
 end
 
+if node['laravel']['version'] < 5
+  storage = "app/storage"
+  config = "app/config"
+else
+  storage = "storage"
+  config = "config"
+end
+
 # Laravel requires this directory to have write access by the web server
 execute "Chmod storage directory" do
   action :nothing
-  command "sudo chmod -R 777 #{path}/storage"
+  command "sudo chmod -R 777 #{path}/#{storage}"
 end
 
 
@@ -58,7 +66,7 @@ else
     Dir.mktmpdir do |dir|
       execute "Create Laravel Project (with temp folder)" do
         action :run
-        command "#{composer_command} create-project laravel/laravel #{dir} --prefer-dist"
+        command "#{composer_command} create-project laravel/laravel #{dir} #{node['laravel']['version']} --prefer-dist"
         notifies :run, "execute[Chmod storage directory]"
       end
 
@@ -80,19 +88,21 @@ else
   else
     execute "Create Laravel Project" do
       action :run
-      command "#{composer_command} create-project laravel/laravel #{path} --prefer-dist"
+      command "#{composer_command} create-project laravel/laravel #{path} #{node['laravel']['version']} --prefer-dist"
       notifies :run, "execute[Chmod storage directory]"
     end
   end
 
   template "#{path}/composer.json" do
-     variables(
+    source "#{node['laravel']['version']}/composer.json.erb"
+    variables(
       :recipes => node['recipes']
     )
     mode "0644"
   end
 
   template "#{path}/.env" do
+    source "#{node['laravel']['version']}/.env.erb"
     variables(
       :host => node['laravel']['db']['host'],
       :name => node['laravel']['db']['name'],
@@ -100,6 +110,7 @@ else
       :password => node['laravel']['db']['password']
     )
     mode "0644"
+    only_if { node['laravel']['version'] >= 5 }
   end
 
   # Update composer dependencies
@@ -108,7 +119,8 @@ else
     command "cd #{path}; #{composer_command} update"
   end
 
-  template "#{path}/config/app.php" do
+  template "#{path}/#{config}/app.php" do
+    source "#{node['laravel']['version']}/app.php.erb"
     variables(
       :recipes => node['recipes']
     )

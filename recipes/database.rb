@@ -25,6 +25,12 @@ path = project_path
 
 package "php5-mysql"
 
+if node['laravel']['version'] < 5
+  config = "app/config"
+else
+  config = "config"
+end
+
 # Check if this is a development machine
 if is_local_host? db['host']
   include_recipe "mysql::server"
@@ -39,9 +45,16 @@ end
 
 # Create the database config file if one does not already exist
 # This is assumed to be during new project creation
-unless ::File.exist?("#{path}/config/database.php")
-  template "#{path}/config/database.php" do
+unless ::File.exist?("#{path}/#{config}/database.php")
+  template "#{path}/#{config}/database.php" do
+    source "#{node['laravel']['version']}/database.php.erb"
     mode "0644"
+    variables(
+      :host => db['host'],
+      :name => db['name'],
+      :user => db['user'],
+      :password => db['password']
+    )
   end
 
   # Create the migration table in the database
