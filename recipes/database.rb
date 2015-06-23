@@ -49,6 +49,12 @@ unless ::File.exist?("#{path}/#{config}/database.php")
   template "#{path}/#{config}/database.php" do
     source "#{node['laravel']['version']}/database.php.erb"
     mode "0644"
+    variables(
+      :host => db['host'],
+      :name => db['name'],
+      :user => db['user'],
+      :password => db['password']
+    )
   end
 
   # Create the migration table in the database
