@@ -30,8 +30,10 @@ end
 
 if node['laravel']['version'] < 5
   storage = "app/storage"
+  config = "app/config"
 else
   storage = "storage"
+  config = "config"
 end
 
 # Laravel requires this directory to have write access by the web server
@@ -117,7 +119,7 @@ else
     command "cd #{path}; #{composer_command} update"
   end
 
-  template "#{path}/config/app.php" do
+  template "#{path}/#{config}/app.php" do
     source "#{node['laravel']['version']}/app.php.erb"
     variables(
       :recipes => node['recipes']
