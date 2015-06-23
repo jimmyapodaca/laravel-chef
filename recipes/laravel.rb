@@ -28,7 +28,7 @@ else
   composer_command = "php composer"
 end
 
-if node['laravel']['version'] >= 5
+if node['laravel']['version'] < 5
   storage = "app/storage"
 else
   storage = "storage"
