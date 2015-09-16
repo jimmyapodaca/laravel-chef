@@ -7,4 +7,9 @@
 	<% end %>
 	CustomLog /var/log/apache2/<%= "dev.#{node['laravel']['project_name']}.com-access_log combined" %>
 	ErrorLog /var/log/apache2/<%= "dev.#{node['laravel']['project_name']}.com-error_log" %>
+	<Directory <%= "#{node['laravel']['project_root']}" %>/public>
+		Allow from all
+		Order allow,deny
+		Require all granted
+	</Directory>
 </VirtualHost>
