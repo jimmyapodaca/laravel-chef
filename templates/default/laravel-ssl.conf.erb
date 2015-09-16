@@ -10,4 +10,10 @@
 	SSLEngine on
 	SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
 	SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+	<Directory <%= "#{node['laravel']['project_root']}" %>/public>
+		Allow from all
+		Order allow,deny
+		Require all granted
+		AllowOverride All
+	</Directory>
 </VirtualHost>
