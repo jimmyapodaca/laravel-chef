@@ -56,6 +56,8 @@ License and Author
 ==================
 Author: Michael Beattie (https://github.com/BeattieM - beattiem@knights.ucf.edu)
 
+Maintainer: Scott Weldon (https://github.com/501st-alpha1 - opensource@scott-weldon.com)
+
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 Acknowledgements

@@ -1,6 +1,6 @@
 name             "laravel"
-maintainer       "Michael Beattie"
-maintainer_email "beattiem@knights.ucf.edu"
+maintainer       "Scott Weldon"
+maintainer_email "open-source@scott-weldon.com"
 license          "MIT license"
 description      "Installs and configures Laravel and additional modules"
 
