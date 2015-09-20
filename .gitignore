@@ -4,3 +4,4 @@
 .librarian/
 tmp/
 Cheffile.lock
+Gemfile.lock
