@@ -136,9 +136,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        'Laracasts\Generators\GeneratorsServiceProvider',
+        Laracasts\Generators\GeneratorsServiceProvider::class,
         <% if @recipes.include?('laravel::admin') %>
-        <%= '\'Frozennode\Administrator\AdministratorServiceProvider\',' %>
+        <%= 'Frozennode\Administrator\AdministratorServiceProvider::class,' %>
         <% end %>
 
         /*
