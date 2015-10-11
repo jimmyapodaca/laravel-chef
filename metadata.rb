@@ -16,6 +16,17 @@ depends "apache2"
 depends "mysql", "4.1.2"
 depends "composer"
 
+# FIXME
+# Without locking the versions of these packages, Librarian-Chef takes an
+# extremely long amount of time to run. This is probably because it has to go
+# to such old versions, which in turn is probably because this cookbooks uses
+# version 4.1.2 of the MySQL cookbook. Thus, this will likely be fixed when
+# the MySQL cookbook is updated.
+depends "yum", "3.6.0"
+depends "yum-epel", "0.6.0"
+depends "iis", "4.1.0"
+# End FIXME
+
 recipe 'laravel', 'Installs and configures Laravel and additional modules.'
 recipe 'laravel::admin', "Installs and configures FrozenNode's Admin module."
 
