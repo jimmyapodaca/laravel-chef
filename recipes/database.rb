@@ -23,7 +23,7 @@ include_recipe "mysql::client"
 ::Chef::Recipe.send(:include, Laravel::Helpers)
 path = project_path
 
-package "php5-mysql"
+package "php#{node['laravel']['php_version']}-mysql"
 
 if node['laravel']['version'] < 5
   config = "app/config"
