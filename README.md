@@ -37,6 +37,9 @@ Attributes
 `node ['laravel']['project_name']` - Laravel project name  
   :default => "user defined requirement"
 
+`node ['laravel']['php_version']` - The version of PHP to install  
+  :default => 5
+
 Recipes
 =======
 ## Laravel
