@@ -38,7 +38,11 @@ end
 
 include_recipe "mysql"
 include_recipe "apache2"
-include_recipe "apache2::mod_php#{node['laravel']['php_version']}"
+if node['laravel']['php_version'] == 7.0
+  package "libapache2-mod-php-7.0"
+else
+  include_recipe "apache2::mod_php#{node['laravel']['php_version']}"
+end
 include_recipe "apache2::mod_ssl"
 include_recipe "composer"
 include_recipe "laravel::laravel"
