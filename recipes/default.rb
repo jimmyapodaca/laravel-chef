@@ -36,7 +36,6 @@ unless File.exists?("#{node['php']['ext_conf_dir']}/mcrypt.ini")
 end
 
 
-include_recipe "mysql"
 include_recipe "apache2"
 include_recipe "apache2::mod_php5"
 include_recipe "apache2::mod_ssl"
