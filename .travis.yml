@@ -1,7 +1,9 @@
 language: ruby
+sudo: required
 rvm:
   - 2.2.3
 install:
+  - sudo apt-get install vagrant
   - bundle install
 script:
   - kitchen verify
