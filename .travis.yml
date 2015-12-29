@@ -3,7 +3,7 @@ sudo: required
 rvm:
   - 2.2.3
 install:
-  - sudo apt-get install virtualbox
+  - sudo apt-get install virtualbox --fix-missing
   - sudo wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb
   - sudo dpkg -i vagrant_1.7.2_x86_64.deb
   - bundle install
