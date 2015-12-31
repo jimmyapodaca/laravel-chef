@@ -43,6 +43,16 @@ execute "Chmod storage directory" do
 end
 
 
+if !node['laravel']['github_oauth'].empty?
+  # FIXME set this dynamically.
+  user_home = "/root"
+
+  template "#{user_home}/.composer/auth.json" do
+    source "github-oauth.json.erb"
+    mode "0644"
+  end
+end
+
 # Check if the composer config files already exist
 if ::File.exist?("#{path}/composer.json")
 
