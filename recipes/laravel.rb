@@ -44,19 +44,7 @@ end
 
 
 if !node['laravel']['github_oauth'].empty?
-  # FIXME set this dynamically.
-  user_home = "/root"
-
-  composer_path = "#{user_home}/.composer"
-
-  if !::File.directory?("#{composer_path}")
-    execute "mkdir --parents #{composer_path}"
-  end
-
-  template "#{composer_path}/auth.json" do
-    source "github-oauth.json.erb"
-    mode "0644"
-  end
+  execute "cd #{path}; #{composer_command} config github-oauth.github.com #{node['laravel']['github_oauth']}"
 end
 
 # Check if the composer config files already exist
