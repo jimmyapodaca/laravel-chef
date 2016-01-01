@@ -15,6 +15,7 @@ suites:
     attributes:
       laravel:
         project_name: "test_app"
+        github_oauth: "FIXME"
       mysql:
         server_root_password: ""
         server_debian_password: ""
