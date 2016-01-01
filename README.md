@@ -37,6 +37,8 @@ Attributes
 `node ['laravel']['project_name']` - Laravel project name  
   :default => "user defined requirement"
 
+`node ['laravel']['github_oauth']` - An OAuth key to use to allow Composer to connect to GitHub.
+
 Recipes
 =======
 ## Laravel

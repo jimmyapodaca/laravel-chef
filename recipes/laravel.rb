@@ -45,6 +45,9 @@ end
 
 # Check if the composer config files already exist
 if ::File.exist?("#{path}/composer.json")
+  if !node['laravel']['github_oauth'].empty?
+    execute "cd #{path}; #{composer_command} config github-oauth.github.com #{node['laravel']['github_oauth']}"
+  end
 
   # Update composer dependencies
   execute "Install Composer Packages" do
@@ -111,6 +114,10 @@ else
     )
     mode "0644"
     only_if { node['laravel']['version'] >= 5 }
+  end
+
+  if !node['laravel']['github_oauth'].empty?
+    execute "cd #{path}; #{composer_command} config github-oauth.github.com #{node['laravel']['github_oauth']}"
   end
 
   # Update composer dependencies
