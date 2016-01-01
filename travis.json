@@ -1,3 +1,16 @@
 {
-    "run_list": ["recipe[laravel::default]"]
+    "run_list": ["recipe[laravel::default]"],
+    "laravel": {
+        "project_name": "test_app",
+        "github_oauth": "FIXME"
+    },
+    "mysql": {
+        "server_root_password": "",
+        "server_debian_password": "",
+        "server_repl_password": ""
+    },
+    "php": {
+        // FIXME
+        "ext_conf_dir": "/etc/php5/mods-available"
+    }
 }
