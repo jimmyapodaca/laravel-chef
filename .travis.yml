@@ -4,6 +4,7 @@ rvm:
   - 2.2.3
 install:
   - bundle install
+  - curl https://www.chef.io/chef/install.sh | sudo bash
 script:
   - kitchen verify
 branches:
