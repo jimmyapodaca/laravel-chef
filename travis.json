@@ -10,6 +10,7 @@
         "server_repl_password": ""
     },
     "php": {
+        "install_method": "source",
         // FIXME
         "ext_conf_dir": "/etc/php5/mods-available"
     }
