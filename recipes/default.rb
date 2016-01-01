@@ -33,6 +33,9 @@ include_recipe "php"
 # Laravel requires mycrypt
 unless File.exists?("#{node['php']['ext_conf_dir']}/mcrypt.ini")
   include_recipe "php-mcrypt"
+
+  # FIXME
+  execute "php5enmod mcrypt"
 end
 
 
