@@ -6,6 +6,8 @@ install:
   - bundle install
   - librarian-chef install
   - curl https://www.chef.io/chef/install.sh | sudo bash
+  # FIXME
+  - sudo mkdir --parents /etc/php5/mods-available
 script:
   - sudo chef-solo --config client.rb --json-attributes travis.json
 branches:
