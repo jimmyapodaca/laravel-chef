@@ -35,7 +35,7 @@ unless File.exists?("#{node['php']['ext_conf_dir']}/mcrypt.ini")
   include_recipe "php-mcrypt"
 
   # FIXME
-  if platform?("debian", "ubuntu")
+  if platform_has_phpenmod?
     execute "php5enmod mcrypt"
   end
 end
